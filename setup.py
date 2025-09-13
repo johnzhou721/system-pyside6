@@ -76,7 +76,7 @@ WheelFile.__init__ = __WheelFile__init__
 
 setup(
     name="system-pyside6",
-    version=0.0.1,
+    version="0.0.1",
     description="Hack system PySide6 and shiboken6 into venv",
     py_modules=[],
     install_requires=[],
