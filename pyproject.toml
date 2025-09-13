@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "system-pyside6"
+version = "0.0.1"
+description = "Hack system PySide6 and shiboken6 into venv"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+dependencies = []
+
+[tool.setuptools]
+# No packages because your project doesn't have any Python modules
+packages = []
