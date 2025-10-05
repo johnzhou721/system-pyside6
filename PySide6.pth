@@ -1,0 +1,1 @@
+import site, sys; old=sys.path[:]; sys.path.extend(site.getsitepackages()); import PySide6; sys.path=old

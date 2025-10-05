@@ -1,0 +1,4 @@
+build
+newdir
+venv
+*.egg-info
