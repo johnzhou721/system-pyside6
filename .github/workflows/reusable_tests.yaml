@@ -3,7 +3,7 @@ name: Common Workflow
 on:
   workflow_call:
     inputs:
-      distro: # the variable you can use in place of a matrix
+      distro:
         required: true
         type: string
       install_cmd:
@@ -37,14 +37,14 @@ jobs:
   briefcase-testbed:
     runs-on: ubuntu-latest
     container:
-      image: ${{ matrix.distro }}
+      image: ${{ inputs.distro }}
     env:
       QT_STYLE_OVERRIDE: breeze
 
     steps:
       - name: Dependencies
         run: |
-          ${{ matrix.install_cmd }}
+          ${{ inputs.install_cmd }}
 
       - name: actions/checkout issue 363 workaround
         run: |
