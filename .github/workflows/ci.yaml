@@ -20,10 +20,6 @@ jobs:
   test:
     name: Test (${{ matrix.distro }})
     needs: pre-commit
-    runs-on: ubuntu-latest
-
-    env:
-      QT_STYLE_OVERRIDE: breeze
 
     strategy:
       fail-fast: false
