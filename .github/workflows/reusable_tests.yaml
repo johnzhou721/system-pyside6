@@ -28,7 +28,7 @@ jobs:
           git config --global --add safe.directory $PWD
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Run tests
         run: |
@@ -51,7 +51,7 @@ jobs:
           git config --global --add safe.directory $PWD
 
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Development Briefcase in venv
         run: |
