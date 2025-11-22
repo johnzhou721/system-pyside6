@@ -67,12 +67,17 @@ def find_dist_info_dir(pkgname):
         if not Path(directory).exists():
             continue
         for entry in Path(directory).iterdir():
-            if (
-                entry.is_dir()
-                and entry.name.startswith(pkgname)
-                and (
-                    entry.name.endswith(".dist-info")
-                    or entry.name.endswith(".egg-info")
+            if entry.is_dir() and (
+                (
+                    entry.name.startswith(pkgname + "-")
+                    and (
+                        entry.name.endswith(".dist-info")
+                        or entry.name.endswith(".egg-info")
+                    )
+                )
+                or (
+                    entry.name == f"{pkgname}.dist-info"
+                    or entry.name == f"{pkgname}.egg-info"
                 )
             ):
                 return entry
