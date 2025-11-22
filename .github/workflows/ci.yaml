@@ -84,7 +84,7 @@ jobs:
                 python3-pytorch \
                 python3-pyside6
 
-    uses: ./.github/workflows/reusable_tests.yml
+    uses: ./.github/workflows/reusable_tests.yaml
     with:
       distro: ${{ matrix.distro }}
       install_cmd: ${{ matrix.install_cmd }}
