@@ -53,13 +53,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Development Briefcase
-        env:
-          PIP_BREAK_SYSTEM_PACKAGES: "1"
+      - name: Install Development Briefcase in venv
         run: |
+          python3 -m venv venv
+          . venv/bin/activate
           python3 -m pip install git+https://github.com/beeware/briefcase.git
 
       - name: Run testbed
         run: |
+          . venv/bin/activate
           cd testbed
           briefcase run --test

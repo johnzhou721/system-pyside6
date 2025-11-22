@@ -35,7 +35,8 @@ jobs:
                 tox \
                 python3-pyside6.qtwidgets \
                 kde-style-breeze \
-                python3-torch
+                python3-torch \
+                build-essential
 
           - distro: fedora:42
             install_cmd: |
@@ -47,7 +48,11 @@ jobs:
                 python3-pyside6 \
                 tox \
                 plasma-breeze-qt6 \
-                python3-torch
+                python3-torch \
+                python3-devel \
+                gcc \
+                make \
+                pkgconf-pkg-config
 
               # Technically an update after install
               # is needed to not brick the system;
@@ -65,7 +70,8 @@ jobs:
                 python-tox \
                 breeze \
                 pyside6 \
-                python-pytorch
+                python-pytorch \
+                base-devel
 
               # Without this, we get an error on ICUi18n:
               # https://www.reddit.com/r/archlinux/comments/1oz6paq/
@@ -82,7 +88,9 @@ jobs:
                 python3-tox \
                 breeze \
                 python3-pytorch \
-                python3-pyside6
+                python3-pyside6 \
+                patterns-devel-base-devel_basis \
+                python3-devel
 
     uses: ./.github/workflows/reusable_tests.yaml
     with:
