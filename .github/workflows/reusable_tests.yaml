@@ -1,0 +1,61 @@
+name: Common Workflow
+
+on:
+  workflow_call:
+    inputs:
+      distro: # the variable you can use in place of a matrix
+        required: true
+        type: string
+      install_cmd:
+        required: true
+        type: string
+
+jobs:
+  venv-test:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.distro }}
+
+    steps:
+      - name: Dependencies
+        run: |
+          ${{ inputs.install_cmd }}
+
+      - name: actions/checkout issue 363 workaround
+        run: |
+          git config --global --add safe.directory $PWD
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run tests
+        run: |
+          tox -e py
+
+  briefcase-testbed:
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.distro }}
+
+    steps:
+      - name: Dependencies
+        run: |
+          ${{ matrix.install_cmd }}
+
+      - name: actions/checkout issue 363 workaround
+        run: |
+          git config --global --add safe.directory $PWD
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Development Briefcase
+        env:
+          PIP_BREAK_SYSTEM_PACKAGES: "1"
+        run: |
+          python -m pip install git+https://github.com/beeware/briefcase.git
+
+      - name: Run testbed
+        run: |
+          cd testbed
+          briefcase run --test
