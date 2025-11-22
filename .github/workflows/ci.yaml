@@ -5,6 +5,7 @@ on:
   push:
     branches:
       main
+  workflow_call:
 
 concurrency:
   group: ${{ github.workflow}}-${{ github.ref }}
@@ -17,9 +18,27 @@ jobs:
     with:
       pre-commit-source: "--group pre-commit"
 
+  package:
+    name: Build Package
+    needs: [ pre-commit ]
+    runs-on: "ubuntu-latest"
+    permissions:
+      id-token: write
+      attestations: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5.0.0
+      with:
+        fetch-depth: 0
+
+    - name: Build and inspect package
+      uses: hynek/build-and-inspect-python-package@v2.14.0
+      with:
+        attest-build-provenance-github: 'true'
+
   test:
     name: Test (${{ matrix.distro }})
-    needs: pre-commit
+    needs: package
 
     strategy:
       fail-fast: false
